@@ -20,3 +20,40 @@ Output: ["banana"]
 
 
 
+class Solution {
+public:
+    vector<string> uncommonFromSentences(string A, string B) {
+        
+        vector<string> result;
+        map<string, int> m;
+        string temp = "";
+        for(int i = 0; i < A.length(); i++)
+        {
+            temp = "";
+            while(i < A.length() && A[i] != ' ')
+            {
+                temp = temp + A[i];
+                i++;
+            }
+            m[temp]++;
+        }
+        for(int i = 0; i < B.length(); i++)
+        {
+            temp = "";
+            while(i < B.length() && B[i] != ' ')
+            {
+                temp = temp + B[i];
+                i++;
+            }
+            m[temp]++;
+        }
+        map<string, int> :: iterator itr = m.begin();
+        while(itr != m.end())
+        {
+            if(itr -> second == 1)
+                result.push_back(itr -> first);
+            itr++;
+        }
+        return result;
+    }
+};
